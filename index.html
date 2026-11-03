@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Aman Kumar Shaw | Oracle DBA & SRE</title>
+<title>Aman Kumar Shaw | Senior Oracle Database Administrator & SRE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@500;700;800&display=swap" rel="stylesheet" />
@@ -574,10 +574,61 @@ footer {
 
   .button-row {
     width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
   }
 
   .btn {
     width: 100%;
+    min-height: 48px;
+  }
+
+  .role {
+    padding: 18px;
+  }
+
+  .role li {
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+  }
+
+  .skills-layout {
+    gap: 12px;
+  }
+
+  .skills-menu {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 10px;
+    scrollbar-width: thin;
+  }
+
+  .skills-menu h3 {
+    display: none;
+  }
+
+  .skill-option {
+    flex: 0 0 auto;
+    width: auto;
+    white-space: nowrap;
+    padding: 10px 14px;
+    margin: 0;
+    border-radius: 999px;
+  }
+
+  .skill-option::after {
+    display: none;
+  }
+
+  .skill-option:hover {
+    transform: none;
+  }
+
+  .skills-detail {
+    min-height: auto;
+    padding: 18px;
   }
 
   section {
@@ -706,7 +757,7 @@ footer {
       </article>
 
       <article class="panel role">
-        <h3>Senior Database Administrator</h3>
+        <h3>Senior Oracle Database Administrator</h3>
         <h4>Tata Consultancy Services</h4>
         <small>Mar 2022 - Present • Kolkata, West Bengal</small>
         <ul>
@@ -773,7 +824,7 @@ footer {
       </article>
       <article class="card">
         <a class="cert-link" href="./aws_certificate.html">
-          <h3>AWS Certified Solutions Architect - 2020</h3>
+          <h3>AWS Certified Solutions Architect Associate</h3>
         </a>
       </article>
       <article class="card">
@@ -888,18 +939,14 @@ function renderSkill(key) {
 
 skillOptions.forEach((option) => {
   option.addEventListener('click', () => {
-    const alreadyActive = option.classList.contains('active');
     skillOptions.forEach((btn) => btn.classList.remove('active'));
-    if (alreadyActive) {
-      renderSkill(null);
-      return;
-    }
     option.classList.add('active');
     renderSkill(option.dataset.skill);
   });
 });
 
-renderSkill(null);
+skillOptions[0].classList.add('active');
+renderSkill(skillOptions[0].dataset.skill);
 </script>
 </body>
 </html>
