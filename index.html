@@ -336,6 +336,11 @@ section {
   color: #d6f7ef;
 }
 
+.skills-select-label,
+.skills-select {
+  display: none;
+}
+
 .skill-option {
   width: 100%;
   text-align: left;
@@ -597,38 +602,56 @@ footer {
   }
 
   .skills-menu {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    overflow-x: auto;
-    padding: 10px;
-    scrollbar-width: thin;
+    padding: 14px;
   }
 
   .skills-menu h3 {
     display: none;
   }
 
+  .skills-select-label {
+    display: block;
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 7px;
+  }
+
+  .skills-select {
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    padding: 10px 40px 10px 13px;
+    border: 1px solid rgba(24, 199, 163, 0.48);
+    border-radius: 12px;
+    background: #0b2029;
+    color: var(--text);
+    font: inherit;
+  }
+
   .skill-option {
-    flex: 0 0 auto;
-    width: auto;
-    white-space: nowrap;
-    padding: 10px 14px;
-    margin: 0;
-    border-radius: 999px;
-  }
-
-  .skill-option::after {
     display: none;
-  }
-
-  .skill-option:hover {
-    transform: none;
   }
 
   .skills-detail {
     min-height: auto;
     padding: 18px;
+  }
+
+  .skills-detail ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+  }
+
+  .skills-detail li {
+    margin: 0;
+    padding: 7px 10px;
+    border: 1px solid rgba(143, 211, 192, 0.24);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.045);
+    font-size: 0.9rem;
   }
 
   section {
@@ -695,10 +718,10 @@ footer {
             <p>Architect Associate Certified</p>
           </div>
         </a>
-        <a class="kpi-link" href="./professional_journey_summary.html">
+        <a class="kpi-link" href="./automation_architecture_summary.html">
           <div class="kpi-item">
-            <h3>1,000+</h3>
-            <p>Oracle Databases Managed</p>
+            <h3>20+</h3>
+            <p>Automation Workflows Delivered</p>
           </div>
         </a>
       </div>
@@ -710,6 +733,16 @@ footer {
     <div class="skills-layout">
       <aside class="panel skills-menu">
         <h3>Select a Category</h3>
+        <label class="skills-select-label" for="skill-select">Skill category</label>
+        <select id="skill-select" class="skills-select">
+          <option value="db">Database Technologies</option>
+          <option value="oracle">Oracle Technologies</option>
+          <option value="devops">DevOps & Containers</option>
+          <option value="script">Programming & Scripting</option>
+          <option value="monitoring">Monitoring & ITSM</option>
+          <option value="cloud">Cloud Platforms</option>
+          <option value="os">Operating Systems</option>
+        </select>
         <button class="skill-option" data-skill="db">Database Technologies</button>
         <button class="skill-option" data-skill="oracle">Oracle Technologies</button>
         <button class="skill-option" data-skill="devops">DevOps & Containers</button>
@@ -922,6 +955,7 @@ const skillTitle = document.getElementById('skill-title');
 const skillSummary = document.getElementById('skill-summary');
 const skillList = document.getElementById('skill-list');
 const skillsPlaceholder = document.getElementById('skills-placeholder');
+const skillSelect = document.getElementById('skill-select');
 
 function renderSkill(key) {
   const data = skillsData[key];
@@ -941,11 +975,20 @@ skillOptions.forEach((option) => {
   option.addEventListener('click', () => {
     skillOptions.forEach((btn) => btn.classList.remove('active'));
     option.classList.add('active');
+    skillSelect.value = option.dataset.skill;
     renderSkill(option.dataset.skill);
   });
 });
 
+skillSelect.addEventListener('change', () => {
+  skillOptions.forEach((option) => {
+    option.classList.toggle('active', option.dataset.skill === skillSelect.value);
+  });
+  renderSkill(skillSelect.value);
+});
+
 skillOptions[0].classList.add('active');
+skillSelect.value = skillOptions[0].dataset.skill;
 renderSkill(skillOptions[0].dataset.skill);
 </script>
 </body>
